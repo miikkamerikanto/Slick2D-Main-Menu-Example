@@ -1,4 +1,6 @@
 Slick2D-Main-Menu-Example
 =========================
 
-Just a simple Slick2D Main Menu Example
+AUTHORS: Miikka Merikanto (miikka.merikantoATbusinesscollege.fi)
+
+CC3.0 reserved
