@@ -5,13 +5,18 @@ import org.newdawn.slick.*;
 
 public class MainMenuExample extends BasicGame {
 
-    private Font font;
-    private TrueTypeFont ttf;
-    private String[] playersOptions = new String[3];
     private int playersChoice = 0;
-    private Color notChosen = new Color(153, 204, 255);
-    private static final int NOCHOICES = 3;
+    private static final int NOCHOICES = 5;
+    private static final int START = 0;
+    private static final int SAVE = 1;
+    private static final int LOAD = 2;
+    private static final int OPTIONS = 3;
+    private static final int QUIT = 4;
+    private String[] playersOptions = new String[NOCHOICES];
     private boolean exit = false;
+    private Font font;
+    private TrueTypeFont playersOptionsTTF, foo;
+    private Color notChosen = new Color(153, 204, 255);
 
     public MainMenuExample() {
         super("Slick2D Main Menu Example");
@@ -20,10 +25,14 @@ public class MainMenuExample extends BasicGame {
     @Override
     public void init(GameContainer gc) throws SlickException {
         font = new Font("Verdana", Font.BOLD, 40);
-        ttf = new TrueTypeFont(font, true);
+        playersOptionsTTF = new TrueTypeFont(font, true);
+        font = new Font ("Verdana", Font.PLAIN, 20);
+        foo = new TrueTypeFont(font, true);
         playersOptions[0] = "Start";
-        playersOptions[1] = "Options";
-        playersOptions[2] = "Quit";
+        playersOptions[1] = "Save";
+        playersOptions[2] = "Load";
+        playersOptions[3] = "Options";
+        playersOptions[4] = "Quit";
     }
 
     @Override
@@ -45,13 +54,14 @@ public class MainMenuExample extends BasicGame {
         }
         if (input.isKeyPressed(Input.KEY_ENTER)) {
             switch (playersChoice) {
-                case 2:
+                case QUIT:
                     exit = true;
                     break;
             }
         }
     }
 
+    @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         renderPlayersOptions();
         if (exit) {
@@ -68,11 +78,11 @@ public class MainMenuExample extends BasicGame {
     }
 
     private void renderPlayersOptions() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < NOCHOICES; i++) {
             if (playersChoice == i) {
-                ttf.drawString(100, i * 50 + 200, playersOptions[i]);
+                playersOptionsTTF.drawString(100, i * 50 + 200, playersOptions[i]);
             } else {
-                ttf.drawString(100, i * 50 + 200, playersOptions[i], notChosen);
+                playersOptionsTTF.drawString(100, i * 50 + 200, playersOptions[i], notChosen);
             }
         }
     }
